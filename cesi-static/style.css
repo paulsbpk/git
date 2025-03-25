@@ -1,0 +1,451 @@
+.TITRE {
+    width: 200px;
+    height: 50px;
+    margin: 0 auto; 
+    display: block;
+}
+
+
+.barre {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: black;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.header-right {
+    margin-left: auto; 
+    gap: 10px; 
+}
+
+/* Style des liens */
+.nav, .log, .log2 {
+    color: white;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+.log2 {
+    padding: 5px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    font-family: sans-serif;
+    border-radius: 5px;
+}
+
+
+.hierarchie {
+    background-color: #e8ecef;
+    margin-top: 10px;
+    padding: 10px;
+    margin-left: auto;
+    border-radius: 10px;
+}
+
+.arbo {
+    padding-left: 10px;
+    text-decoration: none;
+    color: #1ad5f5;
+}
+
+.title {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.desc {
+    color: grey;
+    font-family: sans-serif;
+}
+
+.Foot {
+    padding: 20px;
+    background-color: black;
+    text-align: center;
+    font-style: italic;
+}
+
+.pieds {
+    color: white;
+}
+
+.info {
+    font-family: sans-serif;
+}
+
+.co {
+    font-family: sans-serif;
+    color: grey;
+}
+
+.offre {
+    font-family: sans-serif;
+}
+
+.bouton {
+    padding: 5px;
+}
+
+.candidature {
+    font-family: sans-serif;
+}
+
+.civ {
+    color: #ff6c0a;
+    font-size: larger;
+}
+
+.choix {
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+nav a {
+    color: #ff6c0a;
+    text-decoration: none;
+}
+
+nav a::after {
+    content: " | ";
+    color: white;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.formulaire {
+    color:#ff6c0a;
+    font-size: larger;
+    margin-top:20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+body {
+    background-color: #f3f3f3;
+}
+
+.choix2 {
+    width: 100%; /* Utiliser toute la largeur de l'écran */
+    max-width: 400px; /* Limiter la largeur maximale */
+    border-radius: 4px;
+    height: 20px;
+    color: #ff6c0a;
+}
+
+.mail {
+    width: 100%; /* Utiliser toute la largeur de l'écran */
+    max-width: 300px;
+    height: 20px;
+    color: #ff6c0a;
+    border-radius: 4px;
+}
+
+.information {
+    color: #ff6c0a;
+    font-size: larger;
+}
+
+.checkbox {
+    margin-bottom: 10px;
+    color: #ff6c0a;
+}
+
+.majeur {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: larger;
+}
+
+.majeur h4 {
+    margin-right: 5px;
+    color: #ff6c0a;
+}
+
+.cv {
+    font-size: larger;
+    color: #ff6c0a;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+
+/*BOUTON AJOUTER CV*/
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #ff6c0a;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.custom-file-upload:hover {
+    background-color: #f6c656;
+}
+
+.format {
+    margin: 2px;
+    font-size: smaller;
+}
+
+.Postuler {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    background-color: #ff6c0a;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 0;
+    margin-top: 30px;
+}
+
+.Postuler:hover {
+    background-color: white ;
+    color:black;
+}
+
+.reset {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    margin: 10px 0;
+    margin-top: 30px;
+}
+
+.reset:hover {
+    background-color: #ff6c0a;
+    color:white;
+}
+
+.arbo2 {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .TITRE {
+        width: 150px; /* Réduire la taille du logo pour les petits écrans */
+    }
+
+    .barre {
+        flex-direction: column; /* Empiler les éléments */
+        text-align: center;
+    }
+
+    .choix2, .mail {
+        width: 100%; /* Champs de saisie qui occupent toute la largeur */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .barre {
+        flex-direction: column;
+    }
+
+    .choix2, .mail {
+        width: 100%;
+    }
+
+    .Postuler, .reset {
+        width: 100%;
+        max-width: 150px;
+    }
+}
+
+/* Service Section */
+.service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.service-item {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 80%; /* Ajuste la largeur à 80% de la largeur de l'écran ou selon le besoin */
+    max-width: 500px; /* Limite la largeur à 500px pour ne pas trop s'élargir */
+    margin-bottom: 20px; /* Ajoute un peu d'espace entre les éléments */
+}
+
+.service-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Grid Layout */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.item {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.item p {
+    font-size: 1em;
+    color: #666;
+}
+
+.title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.intro {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.postuler {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: lightgrey;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+/*MENU BURGER*/
+.sidenav {
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    left: -250px;
+    background-color: black;
+    padding-top: 60px;
+  }
+  
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ff6c0a;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: white;
+  }
+  
+  .sidenav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Active class */
+  .sidenav.active {
+    left: 20px;
+  }
+  
+  /* Close btn */
+  .sidenav .close {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+  
+  /* Icône burger */
+  .burger-icon span {
+    display: block;
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    .sidenav {
+        display: none;
+    }
+    .burger-icon {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .barre {
+        display: none;
+    }
+
+    .hierarchie {
+        display:none;
+    }
+}
+
+
+/*BOUTON SCROLL*/
+.scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff6c0a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.scroll-top-btn:hover {
+    background-color: #e05800;
+}
