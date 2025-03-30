@@ -1,6 +1,5 @@
 <?php
-require_once '../config/database.php';
-
+require_once __DIR__ . '/../config/database.php';
 
 class EntrepriseModel {
     private $pdo;
@@ -12,16 +11,18 @@ class EntrepriseModel {
 
     public function getEntreprisesByPage($page, $entreprisesParPage) {
         $offset = ($page - 1) * $entreprisesParPage;
-        
-        $stmt = $this->pdo->prepare("SELECT * FROM entreprise LIMIT :offset, :limit");
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->bindValue(':limit', $entreprisesParPage, PDO::PARAM_INT);
+
+        // Correction : MySQL ne supporte pas les bindValue pour LIMIT
+        $stmt = $this->pdo->prepare("SELECT * FROM entreprise LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $entreprisesParPage, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $entreprises = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
+        // Récupération du nombre total d'entreprises
         $totalStmt = $this->pdo->query("SELECT COUNT(*) FROM entreprise");
         $totalEntreprises = $totalStmt->fetchColumn();
-        
+
         return [
             'entreprises' => $entreprises,
             'page_courante' => $page,

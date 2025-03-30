@@ -1,12 +1,13 @@
 <?php
-require_once '../vendor/autoload.php';
-require_once '/var/www/cesi-demosk/git/cesi-site/Controllers/EntrepriseController.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../Controllers/EntrepriseController.php';
 
-
-
+// Activer l'affichage des erreurs (en dev uniquement)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // Configuration de Twig
-$loader = new \Twig\Loader\FilesystemLoader('../views');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
 $twig = new \Twig\Environment($loader, [
     'cache' => false, // Mettre '../cache' en production
     'debug' => true
@@ -17,18 +18,18 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 // Routage simple
 $route = $_GET['route'] ?? 'entreprises';
+$controller = new EntrepriseController($twig);
 
 switch ($route) {
     case 'entreprises':
-        $controller = new EntrepriseController($twig);
         $controller->index();
         break;
     case 'entreprise_create':
-        $controller = new EntrepriseController($twig);
         $controller->create();
         break;
     default:
-        // Page 404 ou redirection
-        header('Location: index.php?route=entreprises');//test
-        exit;
+        header('HTTP/1.0 404 Not Found');
+        echo "Page introuvable";
+        break;
 }
+?>

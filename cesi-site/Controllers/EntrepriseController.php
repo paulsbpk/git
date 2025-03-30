@@ -1,21 +1,21 @@
 <?php
-require_once '/var/www/cesi-demosk/git/cesi-site/models/Entreprise.php';
+require_once __DIR__ . '/../models/Entreprise.php';
 
 class EntrepriseController {
     private $entrepriseModel;
     private $twig;
-    
+
     public function __construct($twig) {
         $this->entrepriseModel = new EntrepriseModel();
         $this->twig = $twig;
     }
-    
+
     public function index() {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $entreprisesParPage = 9;
-        
+
         $data = $this->entrepriseModel->getEntreprisesByPage($page, $entreprisesParPage);
-        
+
         echo $this->twig->render('entreprise/index.html.twig', [
             'entreprises' => $data['entreprises'],
             'page_courante' => $data['page_courante'],
@@ -30,14 +30,15 @@ class EntrepriseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = $_POST['nom'] ?? '';
             $description = $_POST['description'] ?? '';
-            
+
             if (!empty($nom) && !empty($description)) {
                 $this->entrepriseModel->createEntreprise($nom, $description);
                 header('Location: index.php?route=entreprises');
                 exit();
             }
         }
+
+        echo $this->twig->render('entreprise/create.html.twig');
     }
 }
-
 ?>

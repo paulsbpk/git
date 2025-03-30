@@ -1,53 +1,27 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Liste des Entreprises{% endblock %}
+{% block content %}
+    <h1>Liste des entreprises</h1>
 
-{% block body %}
-    <h1>Liste des Entreprises</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% if entreprises is empty %}
+        <p>Aucune entreprise trouvée.</p>
+    {% else %}
+        <ul>
             {% for entreprise in entreprises %}
-                <tr>
-                    <td>{{ entreprise.id }}</td>
-                    <td>{{ entreprise.Nom_entreprise }}</td>
-                    <td>{{ entreprise.Description }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">Aucune entreprise enregistrée.</td>
-                </tr>
+                <li>{{ entreprise.Nom_entreprise }} - {{ entreprise.Description }}</li>
             {% endfor %}
-        </tbody>
-    </table>
+        </ul>
 
-    <nav>
-        {% if page_courante > 1 %}
-            <a href="?route=entreprises&page={{ page_courante - 1 }}">Précédent</a>
-        {% endif %}
+        <div>
+            Page {{ page_courante }} sur {{ total_pages }}
+            {% if page_courante > 1 %}
+                <a href="?route=entreprises&page={{ page_courante - 1 }}">Précédent</a>
+            {% endif %}
+            {% if page_courante < total_pages %}
+                <a href="?route=entreprises&page={{ page_courante + 1 }}">Suivant</a>
+            {% endif %}
+        </div>
+    {% endif %}
 
-        Page {{ page_courante }} / {{ total_pages }}
-
-        {% if page_courante < total_pages %}
-            <a href="?route=entreprises&page={{ page_courante + 1 }}">Suivant</a>
-        {% endif %}
-    </nav>
-
-    <h2>Ajouter une entreprise</h2>
-    <form action="?route=entreprise_create" method="post">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" required>
-
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-
-        <button type="submit">Ajouter</button>
-    </form>
+    <a href="?route=entreprise_create">Ajouter une entreprise</a>
 {% endblock %}
