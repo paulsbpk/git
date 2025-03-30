@@ -1,6 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
-require_once '../controllers/EntrepriseController.php';
+require_once '/var/www/cesi-demosk/git/cesi-site/controllers/EntrepriseController.php';
+
 
 // Configuration de Twig
 $loader = new \Twig\Loader\FilesystemLoader('../views');
