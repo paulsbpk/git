@@ -1,0 +1,151 @@
+{% extends 'templates/base.html.twig' %}
+
+{% block title %}Postuler à une offre de stage{% endblock %}
+
+{% block arborescence %}
+<a href="index.php?route=accueil" class="arbo">Accueil ></a>
+<a href="index.php?route=offres" class="arbo">Offres ></a>
+<a href="index.php?route=stages" class="arbo">Stages > </a> 
+<a href="#" class="arbo2"> Postuler</a>
+{% endblock %}
+
+{% block content %}
+<h1 class="title">Postuler à une offre de stage</h1>
+<h5 class="desc">Vous pouvez ici répondre directement à l'offre de stage qui a été déposée par l'entreprise. Soyez le plus précis possible dans vos réponses !</h5>
+
+<h2 class="info">Stage - Administrateur Système et Réseau H/F</h2>
+<h6 class="co">IBM | Pornichet - 44 | Publiée le 29/01/2025 | Ref.123XYZ-44</h6>
+
+<div class="Resume">
+    <h3 class="offre">Résumé de l'offre</h3>
+    <button class="bouton">3 Mois</button>
+    <button class="bouton">BAC+2, BAC+3</button>
+    <button class="bouton">Système, Réseaux, Cloud</button>
+    <button class="bouton">Exp - 1 an</button>
+</div>
+
+{% if formulaire_soumis %}
+    {% if erreurs|length > 0 %}
+        <div class="error-message">
+            <p>Veuillez corriger les erreurs suivantes :</p>
+            <ul>
+            {% for error in erreurs %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <div class="data-display">
+        <h3>Données soumises</h3>
+        <div class="data-item">
+            <span class="data-label">Civilité:</span>
+            <span class="data-value">{{ donnees.civilite }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Nom:</span>
+            <span class="data-value">{{ donnees.nom }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Prénom:</span>
+            <span class="data-value">{{ donnees.prenom }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Email:</span>
+            <span class="data-value">{{ donnees.email }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Permis B:</span>
+            <span class="data-value">{{ donnees.permits }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Véhicule:</span>
+            <span class="data-value">{{ donnees.vehicle }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Certifications:</span>
+            <span class="data-value">{{ donnees.certifications }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Majeur:</span>
+            <span class="data-value">{{ donnees.majority == 'yes' ? 'Oui' : 'Non' }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">Message:</span>
+            <span class="data-value">{{ donnees.message|nl2br }}</span>
+        </div>
+        <div class="data-item">
+            <span class="data-label">CV:</span>
+            <span class="data-value">{{ donnees.cv ? donnees.cv : 'Non transmis' }}</span>
+        </div>
+        {% if succes %}
+            <p class="success-message">Candidature envoyée avec succès !</p>
+        {% endif %}
+    </div>
+{% endif %}
+
+<div class="candidature">
+    <h2>Envoyez votre candidature dès maintenant !</h2>
+    <form method="POST" action="index.php?route=candidature" enctype="multipart/form-data">
+        <label for="civilite" class="civ"><strong>CIVILITÉ</strong></label><br>
+        <select id="civilite" name="civilite" class="choix">
+            <option value="monsieur" {% if donnees.civilite == 'monsieur' %}selected{% endif %}>Monsieur</option>
+            <option value="madame" {% if donnees.civilite == 'madame' %}selected{% endif %}>Madame</option>
+        </select>
+        
+        <div>
+            <h4 class="formulaire">NOM</h4>
+            <input type="text" id="nom" name="nom" class="choix2" required value="{{ donnees.nom }}">
+        </div>
+        
+        <div>
+            <h4 class="formulaire">PRÉNOM</h4>
+            <input type="text" id="prenom" name="prenom" class="choix2" required value="{{ donnees.prenom }}">
+        </div>
+        
+        <div>
+            <h4 class="formulaire">COURRIEL</h4>
+            <input type="email" id="email" name="email" class="mail" required value="{{ donnees.email }}">
+        </div>
+        
+        <div>
+            <h4 class="formulaire">À PROPOS DE VOUS</h4>
+            <label><input type="checkbox" name="permits" value="permis" class="checkbox" {% if donnees.permits == 'Oui' %}checked{% endif %}> Permis B</label><br>
+            <label><input type="checkbox" name="vehicle" value="vehicule" class="checkbox" {% if donnees.vehicle == 'Oui' %}checked{% endif %}> Véhicule</label><br>
+            <label><input type="checkbox" name="certifications" value="certifications" class="checkbox" {% if donnees.certifications == 'Oui' %}checked{% endif %}> Certifications (Microsoft, Cisco...)</label><br>
+        </div>
+        
+        <div class="majeur">
+            <h4>JE SUIS MAJEUR :</h4>
+            <label><input type="radio" name="majority" value="yes" required {% if donnees.majority == 'yes' %}checked{% endif %}> Oui</label>
+            <label><input type="radio" name="majority" value="no" required {% if donnees.majority == 'no' %}checked{% endif %}> Non</label>
+        </div>
+        
+        <div>
+            <h4 class="cv">VOTRE MESSAGE AU RECRUTEUR</h4>
+            <textarea id="message" name="message" required>{{ donnees.message }}</textarea>
+        </div>
+        
+        <div>
+            <h6 class="cv">CV</h6>
+            <label for="cv" class="custom-file-upload">Ajouter un CV</label>
+            <input type="file" id="cv" name="cv" accept=".pdf, .doc, .docx, .jpg, .png" required>
+            <p class="format">Format max : 2Mo</p>
+            <p class="format">Formats acceptés : .pdf, .doc, .docx, .odt, .jpeg, .png</p>
+        </div>
+        
+        <button type="submit" class="Postuler">POSTULER</button>
+        <button type="reset" class="reset">RÉINITIALISER</button>
+    </form>
+</div>
+
+<p>En cliquant sur "Postuler", vous acceptez les 
+    <a href="index.php?route=cgu" target="_blank">CGU</a> et déclarez avoir pris connaissance de notre 
+    <a href="index.php?route=politique-protection-donnees" target="_blank">politique de protection des données</a>.
+</p>
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="assets/js/train.js"></script>
+{% endblock %}

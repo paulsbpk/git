@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cesi-static.local/{% block css_file %}style.css{% endblock %}" rel="stylesheet">
+    <title>{% block title %}LEBONPLAN{% endblock %}</title>
+</head>
+<body>
+    <img src="http://cesi-static.local/image/logo-lbp-header.png" class="TITRE" alt="Logo de LEBONPLAN">
+    
+    {% include 'templates/navigation.html.twig' %}
+    
+    <div class="hierarchie">
+        {% block arborescence %}
+        <a href="index.php?route=accueil" class="arbo">Accueil ></a>
+        {% endblock %}
+    </div>
+    
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <button id="scrollTopBtn" class="scroll-top-btn" onclick="topFunction()">↑</button>
+    
+    {% include 'templates/footer.html.twig' %}
+    
+    {% block scripts %}
+    <script src="http://cesi-static.local/script.js"></script>
+    {% endblock %}
+</body>
+</html>

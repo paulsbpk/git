@@ -1,7 +1,6 @@
 <?php
 require_once '../vendor/autoload.php';
 require_once '../controllers/EntrepriseController.php';
-require_once '../controllers/CandidatureController.php';
 
 // Configuration de Twig
 $loader = new \Twig\Loader\FilesystemLoader('../views');
@@ -21,9 +20,9 @@ switch ($route) {
         $controller = new EntrepriseController($twig);
         $controller->index();
         break;
-    case 'candidature':
-        $controller = new CandidatureController($twig);
-        $controller->showForm();
+    case 'entreprise_create':
+        $controller = new EntrepriseController($twig);
+        $controller->create();
         break;
     default:
         // Page 404 ou redirection

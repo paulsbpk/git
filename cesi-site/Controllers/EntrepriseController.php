@@ -1,12 +1,12 @@
 <?php
-require_once '../models/Entreprise.php';
+require_once '../models/EntrepriseModel.php';
 
 class EntrepriseController {
     private $entrepriseModel;
     private $twig;
     
     public function __construct($twig) {
-        $this->entrepriseModel = new Entreprise();
+        $this->entrepriseModel = new EntrepriseModel();
         $this->twig = $twig;
     }
     
@@ -15,11 +15,6 @@ class EntrepriseController {
         $entreprisesParPage = 9;
         
         $data = $this->entrepriseModel->getEntreprisesByPage($page, $entreprisesParPage);
-        
-        // Récupérer les couleurs pour chaque secteur
-        foreach ($data['entreprises'] as &$entreprise) {
-            $entreprise['couleur'] = $this->entrepriseModel->getCouleurSecteur($entreprise['secteur']);
-        }
         
         echo $this->twig->render('entreprise/index.html.twig', [
             'entreprises' => $data['entreprises'],
@@ -30,11 +25,19 @@ class EntrepriseController {
             'total_entreprises' => $data['total_entreprises']
         ]);
     }
-    
-    public function genererLiensPagination($pageCourante, $totalPages) {
-        return [
-            'page_courante' => $pageCourante,
-            'total_pages' => $totalPages
-        ];
+
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nom = $_POST['nom'] ?? '';
+            $description = $_POST['description'] ?? '';
+            
+            if (!empty($nom) && !empty($description)) {
+                $this->entrepriseModel->createEntreprise($nom, $description);
+                header('Location: index.php?route=entreprises');
+                exit();
+            }
+        }
     }
 }
+
+?>
