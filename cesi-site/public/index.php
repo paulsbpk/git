@@ -29,6 +29,6 @@ switch ($route) {
         break;
     default:
         // Page 404 ou redirection
-        header('Location: index.php?route=entreprises');
+        header('Location: index.php?route=entreprises');//test
         exit;
 }
