@@ -1,7 +1,7 @@
 <?php
 // Définir les informations de connexion
 $host = '104.40.143.21'; // hôte de la base de données
-$dbname = 'ws'; // nom de la base de données
+$dbname = 'data'; // nom de la base de données
 $username = 'remoteuser'; // votre nom d'utilisateur MySQL
 $password = 'Polak12!'; // votre mot de passe MySQL
 
