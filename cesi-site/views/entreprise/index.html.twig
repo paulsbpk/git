@@ -1,25 +1,25 @@
+{% block title %}Gestion des Entreprises{% endblock %}
+
 {% block content %}
-    <h1>Liste des entreprises</h1>
+    <h1>Liste des Entreprises</h1>
 
-    {% if entreprises is empty %}
-        <p>Aucune entreprise trouvée.</p>
-    {% else %}
-        <ul>
-            {% for entreprise in entreprises %}
-                <li>{{ entreprise.Nom_entreprise }} - {{ entreprise.Description }}</li>
-            {% endfor %}
-        </ul>
+    <!-- Formulaire de création d'entreprise -->
+    <form method="POST" action="index.php?route=entreprises">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
 
-        <div>
-            Page {{ page_courante }} sur {{ total_pages }}
-            {% if page_courante > 1 %}
-                <a href="?route=entreprises&page={{ page_courante - 1 }}">Précédent</a>
-            {% endif %}
-            {% if page_courante < total_pages %}
-                <a href="?route=entreprises&page={{ page_courante + 1 }}">Suivant</a>
-            {% endif %}
-        </div>
-    {% endif %}
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea>
 
-    <a href="?route=entreprise_create">Ajouter une entreprise</a>
+        <button type="submit" name="submit">Créer</button>
+    </form>
+
+    <!-- Affichage de la liste des entreprises -->
+    <ul>
+        {% for entreprise in entreprises %}
+            <li>{{ entreprise.Nom_entreprise }} - {{ entreprise.Description }}</li>
+        {% else %}
+            <li>Aucune entreprise enregistrée.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
