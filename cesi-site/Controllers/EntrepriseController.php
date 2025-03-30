@@ -1,5 +1,5 @@
 <?php
-require_once '../models/EntrepriseModel.php';
+require_once '/var/www/cesi-demosk/git/cesi-site/models/Entreprise.php';
 
 class EntrepriseController {
     private $entrepriseModel;
