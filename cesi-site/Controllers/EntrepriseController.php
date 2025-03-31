@@ -48,7 +48,8 @@ class EntrepriseController {
             }
         }
 
-        echo $this->twig->render('entreprise/create.html.twig');
+        echo $this->twig->render('entreprise/index.html.twig');
     }
 }
+
 ?>
